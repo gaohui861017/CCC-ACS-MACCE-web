@@ -76,8 +76,9 @@ features = np.array([SEX,MHDM,MHHF,zuzhong,MHCOPD,MHKF,MHMI,MACA,ele_ckmb,stc,ag
 if st.button('Predict'):
     col1, col2 = st.columns(2)
     prob = model.predict_proba(features)[:,1]
-    col1.metric("Score", np.round(prob[0],2), )
-    #*100
+    p = np.round(prob[0],3)
+    col1.metric("Score", f"{p:.3f}", )
+    #
     #col1.metric("Score", round(p[0],2), )
     #col2.metric("Probability of death from admission to 6 months", int(p), )
     #prediction = model.predict_proba(features)[:,1]

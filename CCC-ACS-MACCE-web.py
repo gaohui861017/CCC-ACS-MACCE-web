@@ -68,13 +68,17 @@ killip_4 = np.where(killip_input=='Ⅳ',1,0)
 
 features = np.array([SEX,MHDM,MHHF,zuzhong,MHCOPD,MHKF,MHMI,MACA,ele_ckmb,stc,age_1,age_2,age_3,age_4,si_1,si_2,si_3,bmp_1,bmp_2,bmp_3,killip_1,killip_2,killip_3,killip_4]).reshape(1,-1)
 
+#features = np.array([1,1,1,1,0,1,1,1,1,1,1,0,0,0,1,0,0,1,0,0,0,0,0,1]).reshape(1,-1)
+
 
 
 
 if st.button('Predict'):
     col1, col2 = st.columns(2)
-    p = model.predict_proba(features)[:,1]*100
-    col1.metric("Score", int(p), )
+    prob = model.predict_proba(features)[:,1]
+    col1.metric("Score", np.round(prob[0],2), )
+    #*100
+    #col1.metric("Score", round(p[0],2), )
     #col2.metric("Probability of death from admission to 6 months", int(p), )
     #prediction = model.predict_proba(features)[:,1]
     #st.write(' Based on feature values, your risk score is : '+ str(int(prediction * 100)))
